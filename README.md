@@ -6,7 +6,7 @@ A deterministic repository profiler that tells an AI coding agent how a reposito
 
 ## Project status
 
-**V1 implementation is committed and published; full cross-platform completion is pending.** The standalone npm package is version `0.1.0`, the executable JSON Schema is [schema/profile.schema.json](schema/profile.schema.json), and the frozen synthetic fixture suite covers the required 16 categories plus boundary tests. Windows and Linux verification pass; macOS is unverified. The package is published on [npm](https://www.npmjs.com/package/agent-project-profile) under the `latest` tag.
+**V1 implementation is cross-platform verified; the corrective CLI release source is `0.1.2`.** The executable JSON Schema is [schema/profile.schema.json](schema/profile.schema.json), and the frozen synthetic fixture suite covers the required 16 categories plus boundary tests. GitHub Actions run `34096395160` passed the full Windows, Linux, and macOS matrix on Node 18.18, 20, and 22. The previously published `0.1.1` package exposed a P0 distribution bug in the npm-created executable path, so `0.1.2` is not considered released until registry readback and a clean registry-installed binary smoke both succeed.
 
 The Company KB `AI Agent Tools` (`ai-agent-tools`) remains the project knowledge SSOT. Its roadmap snapshot still records roadmap #3 as `next` after standalone `agent-change-impact`; the owner explicitly authorized this implementation task without changing that ecosystem roadmap state. The tool status record is maintained separately from the ecosystem roadmap and must not be read as proof of cross-platform verification or ecosystem roadmap activation.
 
@@ -42,7 +42,7 @@ Configuration discovery includes TypeScript, Vite, Vitest, Jest, ESLint, Prettie
 
 ## CLI
 
-The examples and exact exit/strict-mode rules below describe the delivered `0.1.0` contract. The package is published on npm; the schema and representative profiles remain versioned repository artifacts.
+The examples and exact exit/strict-mode rules below describe the `0.1.2` release contract. Source version and npm registry state are verified independently; the schema and representative profiles remain versioned repository artifacts.
 
 ```sh
 agent-project-profile .
@@ -114,7 +114,11 @@ npm run build
 npm test
 ```
 
-The `.github/workflows/ci.yml` matrix is prepared for Windows, macOS, and Linux on Node 18.18, 20, and 22. A workflow definition is not itself a completed platform run; unavailable platform results remain unverified in the final delivery report.
+The `.github/workflows/ci.yml` matrix covers Windows, macOS, and Linux on Node 18.18, 20, and 22. Run `34096395160` completed all nine jobs successfully. The release gate now also runs a packaged-consumer E2E: `npm pack` → clean temporary project → tarball install → execute the npm-created binary → validate JSON, `--version`, and `--help`.
+
+### Distribution regression rule
+
+Any package that exposes `bin` MUST have a packaged-consumer E2E that executes the installed binary from a clean project. A direct command such as `node dist/cli.js .` tests an implementation file, but it does not test package metadata, npm-created symlinks/shims, the packed artifact, consumer installation, or real executable invocation.
 
 The implementation is intentionally CLI/JSON-first and does not expose an additional public JavaScript API requirement.
 

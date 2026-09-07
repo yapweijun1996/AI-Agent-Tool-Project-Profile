@@ -22,4 +22,5 @@ jobs:
       - run: npm run typecheck
       - run: npm run build
       - run: npm test
-      - run: node dist/cli.js . --format json
+      - run: npm run test:smoke
+      - run: npm run test:packaged-cli

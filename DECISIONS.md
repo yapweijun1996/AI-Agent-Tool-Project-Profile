@@ -55,7 +55,7 @@ The choices below resolve gaps in the local draft. They are not all independentl
 The following implementation decisions are now resolved in the worktree:
 
 - Implementation language/runtime: TypeScript compiled to ESM JavaScript, Node.js `>=18.18.0`.
-- Distribution/dependencies: standalone package `agent-project-profile@0.1.0`, zero runtime dependencies, development-only TypeScript/Node types/Ajv dependencies.
+- Distribution/dependencies: standalone package `agent-project-profile`, zero runtime dependencies, development-only TypeScript/Node types/Ajv dependencies. Release source is currently `0.1.2`.
 - Budgets: fixed values in `src/constants.ts` and the JSON Schema; workspace and oversized-tree fixtures exercise deterministic overflow behavior.
 - Parsing and detection tables: bounded inert JSON parsing, a restricted YAML subset for `pnpm-workspace.yaml`, finite config/CI/instruction tables, and explicit unsupported syntax diagnostics.
 - Contract: executable JSON Schema `schema/profile.schema.json` with semantic validation and golden/edge coverage.
@@ -63,7 +63,7 @@ The following implementation decisions are now resolved in the worktree:
 
 The following remain lifecycle or release evidence, not unresolved product design:
 
-- Repeatable macOS execution evidence for the same verifier suite is not present in this worktree; Windows and Linux runs are recorded, while the CI matrix has not run from this uncommitted tree.
+- Cross-platform implementation evidence exists in GitHub Actions run `34096395160`: Windows, Linux, and macOS passed on Node 18.18, 20, and 22. The historical run did not validate the npm-installed binary path.
 - The tracked 100,000-file benchmark records bounded profiling behavior on Windows; a release latency target is intentionally not generalized from one machine.
 - Registry availability and publication of `agent-project-profile@0.1.0` were verified after explicit owner authorization. The release commit is `4e892862d20711e6e5837c10a29edf312c8100a0`; no release tag was created.
 
@@ -174,3 +174,10 @@ Use `ai-agent-tools:kb-maintenance` and refresh the records in the source index.
 7. Read back the affected record and ecosystem state after writes before reporting a successful KB update.
 
 This record aligns local prose with the approved KB boundary and the owner-authorized implementation. Company KB status maintenance is performed separately through the existing Project Profile status record; ecosystem roadmap state remains unchanged unless an explicit roadmap decision is made.
+
+## Corrective npm executable decision — 2026-09-07
+
+- `0.1.1` demonstrated a distribution-only failure: direct `node dist/cli.js` execution worked, while the npm-created binary could exit successfully with empty stdout because `cli.ts` compared `process.argv[1]` against `import.meta.url` and the npm bin path could be a symlink/shim path.
+- The corrective architecture separates concerns: `src/cli.ts` owns exported `main()` and CLI behavior; `src/bin.ts` is the dedicated shebang entrypoint and unconditionally assigns `process.exitCode = main()`. Package `bin` maps to `dist/bin.js`.
+- Permanent release rule: any package exposing `bin` must run a packaged-consumer E2E that packs the source, installs the tarball into a clean project, and executes the installed npm binary. Direct `dist` execution is not distribution evidence.
+- Corrective release version is `0.1.2`. Registry publication remains blocked until the exact release source reaches the intended upstream branch and the required CI passes.

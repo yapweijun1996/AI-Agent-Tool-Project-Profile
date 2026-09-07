@@ -20,7 +20,7 @@ Deliver a standalone npm tool, independently versioned/tested/released, with CLI
 
 ## Required product boundary
 
-Follow [SPEC.md](SPEC.md) for the detailed local contract and [DECISIONS.md](DECISIONS.md) for what is approved by the KB versus selected locally. The `0.1.0` worktree freezes the executable choices; remaining platform/performance evidence and publication are separate lifecycle steps.
+Follow [SPEC.md](SPEC.md) for the detailed local contract and [DECISIONS.md](DECISIONS.md) for what is approved by the KB versus selected locally. The `0.1.2` corrective release line preserves the frozen executable contract while fixing npm executable packaging; performance evidence and publication remain separate lifecycle steps.
 
 - First-class Node.js/JavaScript/TypeScript; generic repository and detection-only ecosystem inventory.
 - Repository identity/root, single-package/workspace structure, npm/pnpm/Yarn selection and explicitly declared versions, runtime declarations, packages, scripts, and declared entrypoints.

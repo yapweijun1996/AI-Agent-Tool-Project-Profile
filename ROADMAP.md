@@ -2,7 +2,7 @@
 
 ## Current state
 
-The repository contains the owner-authorized V1 implementation, CLI, versioned JSON Schema, frozen synthetic fixture projections, build configuration, and a cross-platform CI definition. The package is published as `agent-project-profile@0.1.0`, and the implementation is committed at `4e892862d20711e6e5837c10a29edf312c8100a0`. Windows and Linux verification plus a bounded 100,000-file measurement have passed, while an equivalent macOS run remains open.
+The repository contains the owner-authorized V1 implementation, CLI, versioned JSON Schema, frozen synthetic fixture projections, build configuration, and a cross-platform CI definition. This corrective branch prepares release source `agent-project-profile@0.1.2` from upstream baseline `d5f5b0ce6b32ba24150a91a663d842e864ea1e6b`; npm `latest` was `0.1.1` at task start. GitHub Actions run `34096395160` already proves Windows, Linux, and macOS success on Node 18.18, 20, and 22. The corrective release adds the missing packaged-install executable gate before any `0.1.2` publication claim.
 
 The current task authorized implementation and publication. The phases below remain delivery tracking, not a silent promotion of the canonical ecosystem roadmap state.
 
@@ -52,7 +52,7 @@ Exit evidence: workspace fixtures and large/adversarial trees stay within budget
 
 Run the complete [TEST_PLAN.md](TEST_PLAN.md) on Windows, macOS, and Linux. Measure performance, review golden diffs, validate distribution behavior, and document remaining limitations.
 
-Exit evidence: every release checklist item has observable supporting results. The current run has Windows and Linux evidence, the independent 100,000-file benchmark, and npm registry publication readback; macOS remains unverified, so a full V1 completion claim is intentionally withheld. Development verification and release remain independent: publication does not imply that every platform has been verified.
+Exit evidence: every release checklist item has observable supporting results. GitHub Actions run `34096395160` supplies Windows, Linux, and macOS evidence across all three supported Node lines, and the independent 100,000-file benchmark remains recorded. For `0.1.2`, distribution acceptance additionally requires the packaged-consumer E2E to pass in CI and the registry-installed binary to pass after publication. Development verification and release remain independent: CI success does not itself prove npm publication, and registry publication does not replace executable-path verification.
 
 ## Current evidence and KB maintenance
 
