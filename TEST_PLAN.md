@@ -1,6 +1,6 @@
 # V1 Verification and Acceptance Plan
 
-Status: implementation verification in progress. The worktree contains 16 frozen synthetic fixture definitions, a versioned JSON Schema, unit/golden/edge tests, and a cross-platform CI matrix. Windows and Linux verification are recorded below; macOS remains unverified until an equivalent run is available.
+Status: implementation verification in progress for corrective release `0.1.2`. The worktree contains 16 frozen synthetic fixture definitions, a versioned JSON Schema, unit/golden/edge tests, a packaged-consumer CLI E2E, and a cross-platform CI matrix. GitHub Actions run `34096395160` records successful Windows, Linux, and macOS jobs on Node 18.18, 20, and 22; the corrective release must additionally prove the npm-installed executable path.
 
 ## Verification principle
 
@@ -15,6 +15,12 @@ Run the profiler project's own typecheck, build, unit/golden tests, CLI smoke ch
 The test harness may prepare synthetic fixture trees before profiling. During profiling, target contents remain unchanged, and the profiler must perform no project-code execution, network access, installation, or secret-body reads. Observe the profiler's boundary separately from test setup and the harness process launching the CLI.
 
 Independent verification means comparing observable behavior with independently reviewed expectations and safety instrumentation, not treating an implementation's own success message or another tool's passing tests as proof. It does not require additional agents.
+
+## Packaged consumer distribution gate
+
+The old CI smoke used `node dist/cli.js . --format json`. That verified the implementation file directly, but bypassed package metadata, the `bin` mapping, npm-created symlink/shim behavior, the packed tarball, consumer installation, and normal executable invocation. That gap allowed `0.1.1` to publish with a silent npm CLI failure.
+
+Permanent rule: **any package exposing `bin` MUST have a packaged-consumer E2E that executes the installed binary from a clean project.** The gate must perform `npm pack`, install the generated tarball into a fresh consumer, invoke `node_modules/.bin/agent-project-profile` (or its Windows shim), require non-empty JSON stdout with the expected schema/tool version and profile fields, and verify `--version` and `--help`. Direct `node dist/*.js` smoke checks may remain as implementation checks but never substitute for this distribution gate.
 
 ## Required golden matrix
 
@@ -74,15 +80,15 @@ Record timing as external benchmark evidence; do not add timing fields to the pr
 
 ## Verification snapshot — 2026-09-07
 
-The following results are from the owner-authorized worktree. The implementation content tested in the Windows/Linux runs was committed without source changes as `4e892862d20711e6e5837c10a29edf312c8100a0`; the current worktree is clean.
+The historical local Windows/Linux results below were recorded from implementation commit `4e892862d20711e6e5837c10a29edf312c8100a0`. Later upstream commit `d5f5b0ce6b32ba24150a91a663d842e864ea1e6b` completed GitHub Actions run `34096395160` successfully across all nine OS/Node jobs. The current `0.1.2` corrective branch changes only executable packaging/release verification and is verified separately before commit.
 
 | Environment | Evidence | Result |
 | --- | --- | --- |
 | Windows | Node `v25.2.1`, npm `11.6.2`; `npm run typecheck`; `npm test` | 31/31 tests passed |
 | Linux (WSL2 Ubuntu) | Kernel `6.6.87.2-microsoft-standard-WSL2`, Node `v18.19.1`, npm `9.2.0`; `npm --prefix /mnt/c/Users/tno/Documents/GitHub/AI-Agent-Tool-Project-Profile test` | 31/31 tests passed |
-| macOS | No available runner in this session | Unverified |
+| macOS | GitHub Actions run `34096395160`; Node `18.18.0`, `20.x`, `22.x` | All three jobs passed |
 
-The suite includes all 16 golden fixture categories, four schema examples, CLI/strict/fatal behavior, stable ordering, bounded workspaces, metadata-file/source-string/depth/output caps, hostile paths/links, target hash preservation, evidence integrity, and source-level process/network boundary checks. The CI definition covers Windows, macOS, and Linux on Node `18.18.0`, `20.x`, and `22.x`, but it has not run from this local commit. The Linux run also caught and verified the cross-platform Node 18 test-entry fix.
+The suite includes all 16 golden fixture categories, four schema examples, CLI/strict/fatal behavior, stable ordering, bounded workspaces, metadata-file/source-string/depth/output caps, hostile paths/links, target hash preservation, evidence integrity, and source-level process/network boundary checks. GitHub Actions run `34096395160` covers Windows, macOS, and Linux on Node `18.18.0`, `20.x`, and `22.x`; all nine jobs passed. That historical run still used the direct `node dist/cli.js` smoke, so it proves platform behavior of the implementation but not npm package executable behavior. The `0.1.2` corrective CI adds the packaged-consumer gate.
 
 The workspace-cap test exercises the fixed 10,000-entry limit and the suite exercises the other fixed caps. The tracked `npm run test:benchmark` harness also profiles a synthetic tree containing 100,000 generated files. On Windows in this worktree it returned `status: partial`, `directoryEntries: 10000`, `metadataFiles: 1`, `metadataBytes: 79`, `workspaceReturned: 0`, `workspaceTotal: null`, `workspaceTruncated: true`, and `profilingMs: 90` (file creation and cleanup are outside that timing). This confirms bounded behavior; no release latency target is set from one machine.
 
@@ -111,11 +117,13 @@ Run the same applicable contract fixtures on Windows, macOS, and Linux using ava
 - [x] Zero network, LLM/API access, or dependency installation during profiling.
 - [x] Secret-sensitive bodies excluded and hostile links cannot escape the root.
 - [x] Frozen golden fixture projections pass with reviewed expectations.
-- [ ] Windows, macOS, and Linux results recorded.
+- [x] Windows, macOS, and Linux results recorded (GitHub Actions run `34096395160`).
 - [x] Independent 100,000-file bounded measurement recorded; release latency target remains deferred.
-- [x] Distribution shape, runtime support, schema compatibility, and known limitations documented; npm publication of `agent-project-profile@0.1.0` verified.
+- [x] Packaged-consumer E2E exists and passes locally against the generated `0.1.2` tarball.
+- [ ] Packaged-consumer E2E passes the full GitHub Actions matrix for the corrective release source.
+- [ ] Registry-installed `agent-project-profile@0.1.2` binary, `--version`, `--help`, and npm `latest=0.1.2` are verified after publication.
 
-Do not mark V1 done from documentation review alone. Full V1 completion requires the remaining macOS platform evidence; registry publication is already complete and is tracked independently from verification.
+Do not mark the corrective release done from documentation review or direct `dist` execution alone. `0.1.2` completion requires packaged-consumer CI evidence plus registry readback and a clean registry-installed executable smoke; publication and verification remain separate lifecycle facts.
 
 ## Implementation verification report
 

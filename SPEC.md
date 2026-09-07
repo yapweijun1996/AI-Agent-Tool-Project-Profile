@@ -1,6 +1,6 @@
 # V1 Product Specification
 
-Status: implemented V1 contract for the unreleased `0.1.0` package. The Company KB approves the product scope and invariants; this repository owns the executable field layout, schema, deterministic policies, and tests. The schema target is `1.0`; implementation and platform evidence remain lifecycle facts, not claims supplied by the normative text. Source locators and ownership are recorded in [DECISIONS.md](DECISIONS.md).
+Status: implemented V1 contract for release line `0.1.2`. The Company KB approves the product scope and invariants; this repository owns the executable field layout, schema, deterministic policies, and tests. The schema target is `1.0`; implementation and platform evidence remain lifecycle facts, not claims supplied by the normative text. Source locators and ownership are recorded in [DECISIONS.md](DECISIONS.md).
 
 ## 1. Product boundary
 
