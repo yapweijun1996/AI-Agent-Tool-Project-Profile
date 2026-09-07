@@ -113,7 +113,7 @@ Run the same applicable contract fixtures on Windows, macOS, and Linux using ava
 - [x] Frozen golden fixture projections pass with reviewed expectations.
 - [ ] Windows, macOS, and Linux results recorded.
 - [x] Independent 100,000-file bounded measurement recorded; release latency target remains deferred.
-- [x] Distribution shape, runtime support, schema compatibility, and known limitations documented; npm publication of `agent-project-profile@0.1.0` verified.
+- [x] Distribution shape, runtime support, schema compatibility, and known limitations documented; npm publication of corrective `agent-project-profile@0.1.1` verified.
 
 Do not mark V1 done from documentation review alone. Full V1 completion requires the remaining macOS platform evidence; registry publication is already complete and is tracked independently from verification.
 

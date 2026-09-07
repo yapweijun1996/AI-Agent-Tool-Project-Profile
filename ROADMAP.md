@@ -2,7 +2,7 @@
 
 ## Current state
 
-The repository contains the owner-authorized V1 implementation, CLI, versioned JSON Schema, frozen synthetic fixture projections, build configuration, and a cross-platform CI definition. The package is published as `agent-project-profile@0.1.0`, and the implementation is committed at `4e892862d20711e6e5837c10a29edf312c8100a0`. Windows and Linux verification plus a bounded 100,000-file measurement have passed, while an equivalent macOS run remains open.
+The repository contains the owner-authorized V1 implementation, CLI, versioned JSON Schema, frozen synthetic fixture projections, build configuration, and a cross-platform CI definition. The package is published as `agent-project-profile@0.1.1`, and the implementation is committed at `4e892862d20711e6e5837c10a29edf312c8100a0`. Version `0.1.1` is the corrective patch for the published package README. Windows and Linux verification plus a bounded 100,000-file measurement have passed, while an equivalent macOS run remains open.
 
 The current task authorized implementation and publication. The phases below remain delivery tracking, not a silent promotion of the canonical ecosystem roadmap state.
 
