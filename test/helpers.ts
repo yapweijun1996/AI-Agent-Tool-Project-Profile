@@ -55,7 +55,7 @@ export function validateWithSchema(profile: Profile): void {
 }
 
 export function runCli(root: string, ...args: string[]): { status: number; stdout: string; stderr: string } {
-  const cli = path.resolve(process.cwd(), "dist/cli.js");
+  const cli = path.resolve(process.cwd(), "dist/bin.js");
   const result = spawnSync(process.execPath, [cli, root, ...args], { encoding: "utf8" });
   return { status: result.status ?? -1, stdout: result.stdout, stderr: result.stderr };
 }
