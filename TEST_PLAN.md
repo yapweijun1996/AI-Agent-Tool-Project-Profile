@@ -74,7 +74,7 @@ Record timing as external benchmark evidence; do not add timing fields to the pr
 
 ## Verification snapshot — 2026-09-07
 
-The following results are from the owner-authorized uncommitted worktree, based on commit `674bfd6fac19b5198ae85175448e3b7a07415477` plus the listed worktree changes. The commit is a baseline identity only; no implementation commit was created.
+The following results are from the owner-authorized worktree. The implementation content tested in the Windows/Linux runs was committed without source changes as `4e892862d20711e6e5837c10a29edf312c8100a0`; the current worktree is clean.
 
 | Environment | Evidence | Result |
 | --- | --- | --- |
@@ -82,7 +82,7 @@ The following results are from the owner-authorized uncommitted worktree, based 
 | Linux (WSL2 Ubuntu) | Kernel `6.6.87.2-microsoft-standard-WSL2`, Node `v18.19.1`, npm `9.2.0`; `npm --prefix /mnt/c/Users/tno/Documents/GitHub/AI-Agent-Tool-Project-Profile test` | 31/31 tests passed |
 | macOS | No available runner in this session | Unverified |
 
-The suite includes all 16 golden fixture categories, four schema examples, CLI/strict/fatal behavior, stable ordering, bounded workspaces, metadata-file/source-string/depth/output caps, hostile paths/links, target hash preservation, evidence integrity, and source-level process/network boundary checks. The CI definition covers Windows, macOS, and Linux on Node `18.18.0`, `20.x`, and `22.x`, but it has not run from this uncommitted worktree. The Linux run also caught and verified the cross-platform Node 18 test-entry fix.
+The suite includes all 16 golden fixture categories, four schema examples, CLI/strict/fatal behavior, stable ordering, bounded workspaces, metadata-file/source-string/depth/output caps, hostile paths/links, target hash preservation, evidence integrity, and source-level process/network boundary checks. The CI definition covers Windows, macOS, and Linux on Node `18.18.0`, `20.x`, and `22.x`, but it has not run from this local commit. The Linux run also caught and verified the cross-platform Node 18 test-entry fix.
 
 The workspace-cap test exercises the fixed 10,000-entry limit and the suite exercises the other fixed caps. The tracked `npm run test:benchmark` harness also profiles a synthetic tree containing 100,000 generated files. On Windows in this worktree it returned `status: partial`, `directoryEntries: 10000`, `metadataFiles: 1`, `metadataBytes: 79`, `workspaceReturned: 0`, `workspaceTotal: null`, `workspaceTruncated: true`, and `profilingMs: 90` (file creation and cleanup are outside that timing). This confirms bounded behavior; no release latency target is set from one machine.
 
@@ -113,9 +113,9 @@ Run the same applicable contract fixtures on Windows, macOS, and Linux using ava
 - [x] Frozen golden fixture projections pass with reviewed expectations.
 - [ ] Windows, macOS, and Linux results recorded.
 - [x] Independent 100,000-file bounded measurement recorded; release latency target remains deferred.
-- [x] Distribution shape, runtime support, schema compatibility, and known limitations documented; publication remains intentionally pending.
+- [x] Distribution shape, runtime support, schema compatibility, and known limitations documented; npm publication of `agent-project-profile@0.1.0` verified.
 
-Do not mark V1 done from documentation review alone. Full V1 completion requires the remaining macOS platform evidence; release additionally requires an authorized publication decision.
+Do not mark V1 done from documentation review alone. Full V1 completion requires the remaining macOS platform evidence; registry publication is already complete and is tracked independently from verification.
 
 ## Implementation verification report
 

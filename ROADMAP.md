@@ -2,9 +2,9 @@
 
 ## Current state
 
-The repository contains the owner-authorized V1 implementation, CLI, versioned JSON Schema, frozen synthetic fixture projections, build configuration, and a cross-platform CI definition. The package is still an unreleased uncommitted worktree; Windows and Linux verification plus a bounded 100,000-file measurement have passed, while an equivalent macOS run remains open.
+The repository contains the owner-authorized V1 implementation, CLI, versioned JSON Schema, frozen synthetic fixture projections, build configuration, and a cross-platform CI definition. The package is published as `agent-project-profile@0.1.0`, and the implementation is committed at `4e892862d20711e6e5837c10a29edf312c8100a0`. Windows and Linux verification plus a bounded 100,000-file measurement have passed, while an equivalent macOS run remains open.
 
-The current task authorizes implementation. The phases below remain delivery tracking, not a silent promotion of the canonical ecosystem roadmap state or permission to publish.
+The current task authorized implementation and publication. The phases below remain delivery tracking, not a silent promotion of the canonical ecosystem roadmap state.
 
 ### Canonical KB snapshot: 2026-09-07
 
@@ -17,7 +17,7 @@ Source: `Tool Status — agent-project-profile`, item `9aa9a2f8-3453-476f-b8c9-b
 | `design_status` | `approved` |
 | `development_status` | `in_progress` |
 | `verification_status` | `partial` |
-| `release_status` | `unreleased` |
+| `release_status` | `released` |
 | `evidence_status` | `partial` |
 
 The recorded prerequisite is completion of standalone `agent-change-impact`; older Codeloom work is prior art only. This is a delivery sequencing condition, not a runtime dependency on Change Impact. The owner explicitly authorized this implementation task, so development proceeds under that instruction without changing the canonical `roadmap_state: next` or claiming ecosystem activation.
@@ -50,13 +50,13 @@ Exit evidence: workspace fixtures and large/adversarial trees stay within budget
 
 ## Phase 5: Cross-platform release validation
 
-Run the complete [TEST_PLAN.md](TEST_PLAN.md) on Windows, macOS, and Linux. Measure performance, review golden diffs, validate distribution behavior, and document remaining limitations before publishing.
+Run the complete [TEST_PLAN.md](TEST_PLAN.md) on Windows, macOS, and Linux. Measure performance, review golden diffs, validate distribution behavior, and document remaining limitations.
 
-Exit evidence: every release checklist item has observable supporting results. The current run has Windows and Linux evidence plus the independent 100,000-file benchmark; macOS remains unverified, so a full V1 completion claim is intentionally withheld. Development completion and release remain independent: passed implementation verification does not imply the package was published.
+Exit evidence: every release checklist item has observable supporting results. The current run has Windows and Linux evidence, the independent 100,000-file benchmark, and npm registry publication readback; macOS remains unverified, so a full V1 completion claim is intentionally withheld. Development verification and release remain independent: publication does not imply that every platform has been verified.
 
 ## Current evidence and KB maintenance
 
-Use [IMPLEMENTATION_BRIEF.md](IMPLEMENTATION_BRIEF.md) for scope, [TEST_PLAN.md](TEST_PLAN.md) for verification, and the KB maintenance rules in [DECISIONS.md](DECISIONS.md) for lifecycle updates. The implementation report must give the tested commit/worktree identity, actual checks, limitations, and release/package state. Missing evidence remains unknown; no commit, registry publication, or KB status promotion is implied by writing this roadmap. The existing Company KB status record is updated in place for meaningful lifecycle evidence, while the ecosystem SSOT remains at `agent-project-profile: next`.
+Use [IMPLEMENTATION_BRIEF.md](IMPLEMENTATION_BRIEF.md) for scope, [TEST_PLAN.md](TEST_PLAN.md) for verification, and the KB maintenance rules in [DECISIONS.md](DECISIONS.md) for lifecycle updates. The implementation report must give the tested commit/worktree identity, actual checks, limitations, and release/package state. Missing evidence remains unknown; writing this roadmap does not promote the ecosystem roadmap or replace evidence-based KB maintenance. The existing Company KB status record is updated in place for meaningful lifecycle evidence, while the ecosystem SSOT remains at `agent-project-profile: next`.
 
 ## Deferred work
 

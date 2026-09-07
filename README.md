@@ -6,9 +6,9 @@ A deterministic repository profiler that tells an AI coding agent how a reposito
 
 ## Project status
 
-**V1 implementation is present in this worktree; full cross-platform completion is pending.** The standalone npm package is version `0.1.0`, the executable JSON Schema is [schema/profile.schema.json](schema/profile.schema.json), and the frozen synthetic fixture suite covers the required 16 categories plus boundary tests. Windows and Linux verification pass; macOS is unverified. The package is unreleased and has not been published.
+**V1 implementation is committed and published; full cross-platform completion is pending.** The standalone npm package is version `0.1.0`, the executable JSON Schema is [schema/profile.schema.json](schema/profile.schema.json), and the frozen synthetic fixture suite covers the required 16 categories plus boundary tests. Windows and Linux verification pass; macOS is unverified. The package is published on [npm](https://www.npmjs.com/package/agent-project-profile) under the `latest` tag.
 
-The Company KB `AI Agent Tools` (`ai-agent-tools`) remains the project knowledge SSOT. Its roadmap snapshot still records roadmap #3 as `next` after standalone `agent-change-impact`; the owner explicitly authorized this implementation task without changing that ecosystem roadmap state. The tool status record is maintained separately from the ecosystem roadmap and must not be read as proof of cross-platform or registry release evidence.
+The Company KB `AI Agent Tools` (`ai-agent-tools`) remains the project knowledge SSOT. Its roadmap snapshot still records roadmap #3 as `next` after standalone `agent-change-impact`; the owner explicitly authorized this implementation task without changing that ecosystem roadmap state. The tool status record is maintained separately from the ecosystem roadmap and must not be read as proof of cross-platform verification or ecosystem roadmap activation.
 
 The implementation freezes the local V1 choices: Node `>=18.18.0`, no runtime dependencies, bounded inert metadata parsing, the budgets in [SPEC.md](SPEC.md), stable evidence IDs, and the CLI contract below. See [DECISIONS.md](DECISIONS.md) for provenance and lifecycle decisions, and [ROADMAP.md](ROADMAP.md) for verification and release status.
 
@@ -42,7 +42,7 @@ Configuration discovery includes TypeScript, Vite, Vitest, Jest, ESLint, Prettie
 
 ## CLI
 
-The examples and exact exit/strict-mode rules below describe the delivered `0.1.0` worktree contract. The package is not published; the schema and representative profiles are versioned repository artifacts.
+The examples and exact exit/strict-mode rules below describe the delivered `0.1.0` contract. The package is published on npm; the schema and representative profiles remain versioned repository artifacts.
 
 ```sh
 agent-project-profile .
