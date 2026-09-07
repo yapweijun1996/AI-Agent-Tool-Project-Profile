@@ -13,7 +13,8 @@ const consumerDir = path.join(tempRoot, "consumer");
 fs.mkdirSync(packDir, { recursive: true });
 fs.mkdirSync(consumerDir, { recursive: true });
 
-const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
+const npmExecPath = process.env.npm_execpath;
+assert.ok(npmExecPath, "npm_execpath is required; run this E2E through the npm script");
 
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, {
@@ -24,6 +25,10 @@ function run(command, args, options = {}) {
   });
   if (result.error) throw result.error;
   return result;
+}
+
+function runNpm(args, cwd = repoRoot) {
+  return run(process.execPath, [npmExecPath, ...args], { cwd });
 }
 
 function assertSuccess(result, label) {
@@ -40,7 +45,7 @@ function installedBinaryPath() {
 }
 
 try {
-  const pack = run(npmCommand, ["pack", "--pack-destination", packDir]);
+  const pack = runNpm(["pack", "--pack-destination", packDir]);
   assertSuccess(pack, "npm pack");
 
   const tarballs = fs.readdirSync(packDir).filter((name) => name.endsWith(".tgz"));
@@ -59,10 +64,9 @@ try {
     "utf8",
   );
 
-  const install = run(
-    npmCommand,
+  const install = runNpm(
     ["install", "--ignore-scripts", "--no-audit", "--no-fund", tarball],
-    { cwd: consumerDir },
+    consumerDir,
   );
   assertSuccess(install, "consumer npm install");
 
