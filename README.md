@@ -68,6 +68,22 @@ Shell redirection is a caller-controlled write. The profiler itself does not cre
 
 Package manager ambiguity emits a profile with `status: "partial"` and exits `2`, including without `--strict`. An unsupported-only sentinel profile uses `status: "unsupported"` and also exits `2`.
 
+### Global installation for Codex CLI
+
+The corrected source is `0.1.2`, but the public npm `latest` tag is still `0.1.1`; that older artifact has the known incorrect `dist/cli.js` executable path. After `0.1.2` is published, install it from any directory with no repository checkout or `cd` required:
+
+```sh
+npm install --global agent-project-profile@latest
+agent-project-profile . --format json
+```
+
+Until that registry publication is complete, install the corrected GitHub revision; npm builds the checkout through its `prepare` script:
+
+```sh
+npm install --global github:yapweijun1996/AI-Agent-Tool-Project-Profile
+agent-project-profile . --format json
+```
+
 ## Output
 
 The versioned JSON contract has these top-level fields:

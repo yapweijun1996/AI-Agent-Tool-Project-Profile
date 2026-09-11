@@ -3,6 +3,21 @@
   "version": "0.1.2",
   "description": "Deterministic, read-only repository profiles for AI coding agents.",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yapweijun1996/AI-Agent-Tool-Project-Profile.git"
+  },
+  "homepage": "https://github.com/yapweijun1996/AI-Agent-Tool-Project-Profile#readme",
+  "bugs": {
+    "url": "https://github.com/yapweijun1996/AI-Agent-Tool-Project-Profile/issues"
+  },
+  "keywords": [
+    "ai-agent",
+    "repository-profile",
+    "project-intelligence",
+    "static-analysis",
+    "cli"
+  ],
   "license": "MIT",
   "engines": {
     "node": ">=18.18.0"
@@ -13,7 +28,8 @@
   "files": [
     "dist",
     "schema",
-    "examples"
+    "examples",
+    "README.md"
   ],
   "scripts": {
     "typecheck": "tsc -p tsconfig.json --noEmit",
@@ -23,7 +39,12 @@
     "test:benchmark": "npm run build && node test/benchmark.mjs",
     "test:smoke": "npm run build && node dist/bin.js . --format json",
     "prepack": "npm run build",
-    "test:packaged-cli": "node test/packaged-cli-e2e.mjs"
+    "test:packaged-cli": "node test/packaged-cli-e2e.mjs",
+    "prepare": "npm run build"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
