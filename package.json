@@ -39,8 +39,7 @@
     "test:benchmark": "npm run build && node test/benchmark.mjs",
     "test:smoke": "npm run build && node dist/bin.js . --format json",
     "prepack": "npm run build",
-    "test:packaged-cli": "node test/packaged-cli-e2e.mjs",
-    "prepare": "npm install --global=false --ignore-scripts --include=dev --no-package-lock --no-audit --no-fund && npm run build"
+    "test:packaged-cli": "node test/packaged-cli-e2e.mjs"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

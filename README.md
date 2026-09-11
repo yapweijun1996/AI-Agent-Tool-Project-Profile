@@ -77,12 +77,7 @@ npm install --global agent-project-profile@latest
 agent-project-profile . --format json
 ```
 
-Until that registry publication is complete, install the corrected GitHub revision; npm builds the checkout through its `prepare` script:
-
-```sh
-npm install --global github:yapweijun1996/AI-Agent-Tool-Project-Profile
-agent-project-profile . --format json
-```
+Until that registry publication is complete, use the repository's packaged-consumer check (`npm run test:packaged-cli`) or install the locally built tarball.
 
 ## Output
 
