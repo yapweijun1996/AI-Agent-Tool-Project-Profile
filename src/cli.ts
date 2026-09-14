@@ -1,9 +1,6 @@
-#!/usr/bin/env node
 import { createErrorProfile, profileRepository } from "./core/profiler.js";
 import { TOOL_VERSION } from "./constants.js";
 import type { Profile } from "./types.js";
-import path from "node:path";
-import { pathToFileURL } from "node:url";
 
 interface ParsedArgs {
   root: string | null;
@@ -147,8 +144,4 @@ function renderText(profile: Profile): string {
   }
   lines.push(`runtimes: ${profile.runtimes.length}`, `entrypoints: ${profile.entrypoints.length}`, `configs: ${profile.configs.length}`, `instructions: ${profile.instructions.length}`, `ci: ${profile.ci.length}`, `warnings: ${profile.warnings.length}`);
   return `${lines.join("\n")}\n`;
-}
-
-if (process.argv[1] !== undefined && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) {
-  process.exitCode = main();
 }
